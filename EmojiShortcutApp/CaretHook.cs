@@ -20,7 +20,7 @@ namespace EmojiShortcutApp
             public IntPtr hwndMenuOwner;
             public IntPtr hwndMoveSize;
             public IntPtr hwndCaret;
-            public System.Drawing.Rectangle rcCaret;
+            public Rectangle rcCaret;
         }
 
         [DllImport("user32.dll")]
@@ -33,23 +33,23 @@ namespace EmojiShortcutApp
 
             if (!GetGUIThreadInfo(0, ref gti))
             {
-                Debug.WriteLine("Failed to get GUI Thread Info");
+                //Debug.WriteLine("Failed to get GUI Thread Info");
                 return false;
             }
 
-            Debug.WriteLine(gti.rcCaret); // The position of the caret in the parent, 
+            //Debug.WriteLine(gti.rcCaret); // The position of the caret in the parent, 
                                             // if the active control is a text box or similar
 
             var point = gti.rcCaret.Location;
             if (!ClientToScreen(gti.hwndCaret, ref point))
             {
-                Debug.WriteLine("Failed to get relative coordinates");
+                //Debug.WriteLine("Failed to get relative coordinates");
                 return false;
             }
 
             caretPoint = point;
 
-            Debug.WriteLine(point); // The position of the caret in screen-coördinates
+            //Debug.WriteLine(point); // The position of the caret in screen-coördinates
 
             return true;
         }
